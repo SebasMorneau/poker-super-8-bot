@@ -1,3 +1,5 @@
 module.exports = async function App(context) {
-  await context.sendText('Welcome to Bottender');
+  if (context.event.text) {
+    await context.sendText('Welcome Emma Stone 2');
+  }
 };

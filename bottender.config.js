@@ -25,7 +25,7 @@ module.exports = {
   channels: {
     messenger: {
       enabled: true,
-      path: '/webhook/messenger',
+      path: '/webhook',
       pageId: process.env.MESSENGER_PAGE_ID,
       accessToken: process.env.MESSENGER_ACCESS_TOKEN,
       appId: process.env.MESSENGER_APP_ID,

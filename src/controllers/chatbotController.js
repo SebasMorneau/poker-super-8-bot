@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN
+const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 
 let test = (req, res) => {
   return res.send("Emma Stone is a hot babe");
@@ -39,6 +39,9 @@ let postWebhook = (req, res) => {
       // will only ever contain one message, so we get index 0
       let webhook_event = entry.messaging[0];
       console.log(webhook_event);
+
+      let sender_psid = webhook_event.sender.id;
+      console.log("Sender PSID: ", sender_psid);
     });
 
     // Returns a '200 OK' response to all requests

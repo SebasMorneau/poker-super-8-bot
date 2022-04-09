@@ -4,7 +4,7 @@ import request from "request";
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 
 let test = (req, res) => {
-  return res.send("Emma Stone is a hot babe");
+  return res.send("Super-8-Bot");
 };
 
 let getWebhook = (req, res) => {

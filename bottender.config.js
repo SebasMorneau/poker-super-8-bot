@@ -3,7 +3,7 @@ module.exports = {
     driver: 'memory',
     stores: {
       memory: {
-        
+
         maxSize: 500,
       },
       file: {
@@ -25,7 +25,7 @@ module.exports = {
   channels: {
     messenger: {
       enabled: true,
-      path: '/webhooks/messenger',
+      path: '/webhook/messenger',
       pageId: process.env.MESSENGER_PAGE_ID,
       accessToken: process.env.MESSENGER_ACCESS_TOKEN,
       appId: process.env.MESSENGER_APP_ID,

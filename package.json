@@ -1,22 +1,30 @@
 {
-  "name": "super-eight-poker-bot",
-  "version": "0.1.0",
-  "private": true,
+  "name": "poker-super-8-bot",
+  "version": "1.0.0",
+  "description": "poker super-8",
+  "main": "server.js",
   "scripts": {
-    "dev": "bottender dev",
-    "lint": "eslint . ",
-    "start": "bottender start",
-    "test": "jest"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node src/server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SebasMorneau/poker-super-8-bot.git"
+  },
+  "author": "sebastien morneau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SebasMorneau/poker-super-8-bot/issues"
+  },
+  "homepage": "https://github.com/SebasMorneau/poker-super-8-bot#readme",
   "dependencies": {
-    "bottender": "1.5.5",
-    "firebase": "^9.6.7"
-  },
-  "devDependencies": {
-    "eslint": "^8.5.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "jest": "^27.4.5",
-    "prettier": "^2.5.1"
+    "@babel/core": "^7.17.9",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.11",
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15"
   }
 }

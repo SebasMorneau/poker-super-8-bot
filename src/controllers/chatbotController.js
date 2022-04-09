@@ -62,14 +62,16 @@ let postWebhook = (req, res) => {
 };
 
 function handleMessage(sender_psid, received_message) {
-  let response;
+  let response = "null";
+  const message = received_message.text;
 
   // Check if the message contains text
-  if (received_message.text) {
-    // Create the payload for a basic text message
-    response = {
-      text: `You sent the message: "${received_message.text}". Now send me an image!`,
-    };
+  if (message) {
+    if (message === "Test") {
+      response = {
+        text: "Alright!",
+      };
+    }
   }
 
   // Sends the response message

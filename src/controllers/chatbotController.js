@@ -3,8 +3,8 @@ import request from "request";
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
 
-let test = (req, res) => {
-  return res.send("Super-8-Bot");
+let index = (req, res) => {
+  return res.render("homepage");
 };
 
 let getWebhook = (req, res) => {
@@ -65,9 +65,11 @@ function handleMessage(sender_psid, received_message) {
   let response = "null";
   const message = received_message.text;
 
+  const keywords = ["Alfred, alfred"];
+
   // Check if the message contains text
   if (message) {
-    if (message === "Test") {
+    if (keywords.includes(message)) {
       response = {
         text: "Alright!",
       };
@@ -107,7 +109,7 @@ function callSendAPI(sender_psid, response) {
 }
 
 module.exports = {
-  test: test,
+  index: index,
   getWebhook: getWebhook,
   postWebhook: postWebhook,
 };

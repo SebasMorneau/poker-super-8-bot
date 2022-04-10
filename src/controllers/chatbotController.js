@@ -69,13 +69,19 @@ function handleMessage(sender_psid, received_message) {
 
   // Check if the message contains text
   if (message) {
-    console.log("TEST", keywords, message);
+    console.log("TEST", keywords, message, keywords.includes(message));
     if (keywords.includes(message)) {
       response = {
         text: "Alright!",
       };
     }
   }
+
+  // get message keyword
+
+  // post to db the game results winner
+
+  // get from the db, the current standings
 
   // Sends the response message
   callSendAPI(sender_psid, response);
@@ -101,6 +107,7 @@ function callSendAPI(sender_psid, response) {
     },
     (err, res, body) => {
       if (!err) {
+        console.log(request_body.message);
         console.log("message sent!");
       } else {
         console.error("Unable to send message:" + err);

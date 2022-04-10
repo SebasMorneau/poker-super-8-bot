@@ -69,6 +69,7 @@ function handleMessage(sender_psid, received_message) {
 
   // Check if the message contains text
   if (message) {
+    console.log("TEST", keywords, message);
     if (keywords.includes(message)) {
       response = {
         text: "Alright!",

@@ -65,7 +65,7 @@ function handleMessage(sender_psid, received_message) {
   let response = "null";
   const message = received_message.text;
 
-  const keywords = ["Alfred, alfred"];
+  const keywords = ["Alfred", "alfred"];
 
   // Check if the message contains text
   if (message) {

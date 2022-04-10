@@ -1,1 +1,1 @@
-web: bin/qgtunnel node src/server.js
+web:node src/server.js

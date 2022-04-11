@@ -67,11 +67,13 @@ function handleMessage(sender_psid, received_message) {
 
   const keywords = ["Alfred", "alfred"];
 
+  const words = message.split("\n");
+
   // Check if the message contains text
   if (message) {
     if (keywords.includes(message)) {
       response = {
-        text: "Alright!",
+        text: `Alright! ${words}`,
       };
     }
   }

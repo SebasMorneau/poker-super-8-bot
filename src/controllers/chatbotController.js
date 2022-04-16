@@ -73,31 +73,29 @@ function handleMessage(sender_psid, received_message) {
 
   const words = message.split("\n");
 
-  if (helpKeyword.includes(message)) {
-    response = {
-      text: "You can say Final to post a result about a game, and update the current toournament. Otherwise, you can setup a new tournament by saying Tournament!",
-    };
-  }
-
-  // switch (message) {
-  //   case endOfGameKeywords.includes(message):
-  //     response = {
-  //       text: `Alright! What is the results?`,
-  //     };
-  //     break;
-  //   case setupTournament.includes(message):
-  //     response = {
-  //       text: `Alright! Let's setup this new tournament`,
-  //     };
-  //     break;
-  //   case helpKeyword.includes(message):
-  //     response = {
-  //       text: "You can say Final to post a result about a game, and update the current toournament. Otherwise, you can setup a new tournament by saying Tournament!",
-  //     };
-
-  //   default:
-  //     break;
+  // if (helpKeyword.includes(message)) {
+  //   response = {
+  //     text: "You can say Final to post a result about a game, and update the current toournament. Otherwise, you can setup a new tournament by saying Tournament!",
+  //   };
   // }
+
+  switch (message) {
+    case endOfGameKeywords.includes(message):
+      response = {
+        text: `Alright! What is the results?`,
+      };
+      break;
+    case setupTournament.includes(message):
+      response = {
+        text: `Alright! Let's setup this new tournament`,
+      };
+      break;
+    case helpKeyword.includes(message):
+      response = {
+        text: "You can say Final to post a result about a game, and update the current toournament. Otherwise, you can setup a new tournament by saying Tournament!",
+      };
+      break;
+  }
 
   // get message keyword
 

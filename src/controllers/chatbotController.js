@@ -118,7 +118,7 @@ function callSendAPI(sender_psid, response) {
     recipient: {
       id: sender_psid,
     },
-    message: response,
+    message: response.text,
   };
 
   // Send the HTTP request to the Messenger Platform
@@ -131,7 +131,7 @@ function callSendAPI(sender_psid, response) {
     },
     (err, res, body) => {
       if (!err) {
-        console.log("message sent!", request_body);
+        console.log("message sent!", request_body.message);
       } else {
         console.error("Unable to send message:" + err);
       }

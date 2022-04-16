@@ -65,17 +65,32 @@ function handleMessage(sender_psid, received_message) {
   let response = "null";
   const message = received_message.text;
 
-  const keywords = ["Alfred", "alfred"];
+  const endOfGameKeywords = ["Final"];
+
+  const setupTournament = ["Tournament"];
+
+  const helpKeyword = ["Help", "help"];
 
   const words = message.split("\n");
 
-  // Check if the message contains text
-  if (message) {
-    if (keywords.includes(message)) {
+  switch (message) {
+    case endOfGameKeywords.includes(message):
       response = {
-        text: `Alright! ${words}`,
+        text: `Alright! What is the results?`,
       };
-    }
+      break;
+    case setupTournament.includes(message):
+      response = {
+        text: `Alright! Let's setup this new tournament`,
+      };
+      break;
+    case helpKeyword.includes(message):
+      response = {
+        text: "You can say Final to post a result about a game, and update the current toournament. Otherwise, you can setup a new tournament by saying Tournament!",
+      };
+
+    default:
+      break;
   }
 
   // get message keyword

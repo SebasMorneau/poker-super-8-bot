@@ -131,7 +131,7 @@ function callSendAPI(sender_psid, response) {
     },
     (err, res, body) => {
       if (!err) {
-        console.log("message sent!");
+        console.log("message sent!", request_body);
       } else {
         console.error("Unable to send message:" + err);
       }

@@ -81,42 +81,28 @@ function handleMessage(sender_psid, received_message) {
     // Sends the response message
     callSendAPI(sender_psid, response);
   } else if (setupTournament.includes(message)) {
-    response = {
-      text: "Alright, let's do this! How many player, still 8?",
+    const nutritionalValue = [];
+
+    // I dont like using forEach
+    let obj = {
+      title: "Alright, let;s do this! Still 8 players?",
+      image_url:
+        "https://www.imdb.com/name/nm1297015/mediaviewer/rm3228157440/",
+      subtitle: "Say yes!",
+    };
+    nutritionalValue.push(obj);
+
+    let messageData = {
       attachment: {
         type: "template",
         payload: {
           template_type: "generic",
-          elements: [
-            {
-              title: "Welcome!",
-              image_url:
-                "https://raw.githubusercontent.com/fbsamples/original-coast-clothing/main/public/styles/male-work.jpg",
-              subtitle: "We have the right hat for everyone.",
-              default_action: {
-                type: "web_url",
-                url: "https://www.originalcoastclothing.com/",
-                webview_height_ratio: "tall",
-              },
-              buttons: [
-                {
-                  type: "web_url",
-                  url: "https://www.originalcoastclothing.com/",
-                  title: "View Website",
-                },
-                {
-                  type: "postback",
-                  title: "Start Chatting",
-                  payload: "DEVELOPER_DEFINED_PAYLOAD",
-                },
-              ],
-            },
-          ],
+          elements: nutritionalValue,
         },
       },
     };
     // Sends the response message
-    callSendAPI(sender_psid, response);
+    callSendAPI(sender_psid, messageData);
   }
 
   // get message keyword

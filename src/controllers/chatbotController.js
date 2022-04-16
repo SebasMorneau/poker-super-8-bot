@@ -62,6 +62,38 @@ let postWebhook = (req, res) => {
   }
 };
 
+const imageTemplate = (text) => {
+  const nutritionalValue = [];
+  let obj = {
+    title: text,
+    image_url: "https://www.imdb.com/name/nm1297015/mediaviewer/rm3228157440/",
+    subtitle: "Say yes!",
+  };
+  nutritionalValue.push(obj);
+
+  return {
+    attachment: {
+      type: "template",
+      payload: {
+        template_type: "button",
+        text: text,
+        buttons: [
+          {
+            type: "postback",
+            title: "Yes",
+            payload: "YES_HEIGHT",
+          },
+          {
+            type: "postback",
+            title: "No",
+            payload: "NOT_EIGHT",
+          },
+        ],
+      },
+    },
+  };
+};
+
 function handleMessage(sender_psid, received_message) {
   let response = "null";
   const message = received_message.text;
@@ -81,40 +113,8 @@ function handleMessage(sender_psid, received_message) {
     // Sends the response message
     callSendAPI(sender_psid, response);
   } else if (setupTournament.includes(message)) {
-    const nutritionalValue = [];
-
-    // I dont like using forEach
-    let obj = {
-      title: "Alright, let;s do this! Still 8 players?",
-      image_url:
-        "https://www.imdb.com/name/nm1297015/mediaviewer/rm3228157440/",
-      subtitle: "Say yes!",
-    };
-    nutritionalValue.push(obj);
-
-    let messageData = {
-      attachment: {
-        type: "template",
-        payload: {
-          template_type: "button",
-          text: text,
-          buttons: [
-            {
-              type: "postback",
-              title: "Yes",
-              payload: "YES_HEIGHT",
-            },
-            {
-              type: "postback",
-              title: "No",
-              payload: "NOT_EIGHT",
-            },
-          ],
-        },
-      },
-    };
     // Sends the response message
-    callSendAPI(sender_psid, messageData);
+    callSendAPI(sender_psid, imageTemplate("EMMA STONE!!"));
   }
 
   // get message keyword
@@ -131,9 +131,28 @@ function handleMessage(sender_psid, received_message) {
 
   // RETURN standings in message, position, name, points
 }
-function handlePostback(sender_psid, received_postback) {}
+function handlePostback(sender_psid, received_postback) {
+  let response;
 
-function callSendAPI(sender_psid, response) {
+  // Get the payload for the postback
+  let payload = received_postback.payload;
+
+  // Set the response based on the postback payload
+  if (payload === "YES_EIGHT") {
+    response = imageTemplate("cats", sender_psid);
+    callSendAPI(sender_psid, response, function () {
+      callSendAPI(sender_psid, askTemplate("Emma Stone is hot"));
+    });
+  } else if (payload === "NO_EIGHT") {
+    response = imageTemplate("dogs", sender_psid);
+    callSendAPI(sender_psid, response, function () {
+      callSendAPI(sender_psid, askTemplate("Emma Stone is a babe"));
+    });
+  }
+  // Send the message to acknowledge the postback
+}
+
+function callSendAPI(sender_psid, response, cb = null) {
   // Construct the message body
   let request_body = {
     recipient: {
@@ -153,6 +172,9 @@ function callSendAPI(sender_psid, response) {
     (err, res, body) => {
       if (!err) {
         console.log("message sent!", request_body);
+        if (cb) {
+          cb();
+        }
       } else {
         console.error("Unable to send message:" + err);
       }

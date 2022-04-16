@@ -1,4 +1,5 @@
 require("dotenv").config();
+import { template } from "@babel/core";
 import request from "request";
 
 const MY_VERIFY_TOKEN = process.env.MY_VERIFY_TOKEN;
@@ -73,28 +74,44 @@ function handleMessage(sender_psid, received_message) {
 
   const words = message.split("\n");
 
-  // if (helpKeyword.includes(message)) {
-  //   response = {
-  //     text: "You can say Final to post a result about a game, and update the current toournament. Otherwise, you can setup a new tournament by saying Tournament!",
-  //   };
-  // }
-
-  switch (message) {
-    case endOfGameKeywords.includes(message):
-      response = {
-        text: `Alright! What is the results?`,
-      };
-      break;
-    case setupTournament.includes(message):
-      response = {
-        text: `Alright! Let's setup this new tournament`,
-      };
-      break;
-    case helpKeyword.includes(message):
-      response = {
-        text: "You can say Final to post a result about a game, and update the current toournament. Otherwise, you can setup a new tournament by saying Tournament!",
-      };
-      break;
+  if (helpKeyword.includes(message)) {
+    response = {
+      text: "You can say Final to post a result about a game, and update the current toournament. Otherwise, you can setup a new tournament by saying Tournament!",
+    };
+    // Sends the response message
+    callSendAPI(sender_psid, response);
+  } else if (setupTournament.includes(message)) {
+    response = {
+      text: "Alright, let's do this! How many player, still 8?",
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: [{
+            title: "Welcome!",
+            image_url: "https://raw.githubusercontent.com/fbsamples/original-coast-clothing/main/public/styles/male-work.jpg",
+            subtitle: "We have the right hat for everyone.",
+            default_action: {
+              type: "web_url",
+              url: "https://www.originalcoastclothing.com/",
+              webview_height_ratio: "tall",
+            },
+            buttons: [
+              {
+                type: "web_url",
+                url: "https://www.originalcoastclothing.com/",
+                title: "View Website"
+              }, {
+                type: "postback",
+                title: "Start Chatting",
+                payload: "DEVELOPER_DEFINED_PAYLOAD"
+              }    
+          }]
+        }
+      }
+    };
+    // Sends the response message
+    callSendAPI(sender_psid, response);
   }
 
   // get message keyword
@@ -110,9 +127,6 @@ function handleMessage(sender_psid, received_message) {
   // get from the db, the current standings
 
   // RETURN standings in message, position, name, points
-
-  // Sends the response message
-  callSendAPI(sender_psid, response);
 }
 function handlePostback(sender_psid, received_postback) {}
 

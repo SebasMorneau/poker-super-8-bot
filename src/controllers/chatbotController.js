@@ -96,8 +96,20 @@ function handleMessage(sender_psid, received_message) {
       attachment: {
         type: "template",
         payload: {
-          template_type: "generic",
-          elements: nutritionalValue,
+          template_type: "button",
+          text: text,
+          buttons: [
+            {
+              type: "postback",
+              title: "Yes",
+              payload: "YES_HEIGHT",
+            },
+            {
+              type: "postback",
+              title: "No",
+              payload: "NOT_EIGHT",
+            },
+          ],
         },
       },
     };
